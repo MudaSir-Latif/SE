@@ -1,0 +1,19 @@
+
+.name{
+    color: aqua;
+    max-width: 20%;
+    min-width: 15%;
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 400;
+    font-size: 2rem; 
+}
+
+.container{
+    max-width: 100% !important;
+    
+}
+
+.nav-item a {
+    font-size: 1.35rem;   
+}
+
