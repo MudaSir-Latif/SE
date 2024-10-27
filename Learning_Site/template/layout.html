@@ -78,9 +78,12 @@
     </nav>
   </header>
 
+  {% block content %}
   <main>
-    <p>content page</p>
+    <h1 class="justify-content-center justify-content-center flex-grow-1 mx-3 d-flex " style="color: red; font-size: 25rem; font-weight: bold;">CONTENT</h1>
   </main>
+  {% endblock %}
+
   <footer class="footer bg-dark text-light p-4 fixed-bottom">
     <div class="container">
       <!-- First Row: Site Name -->
