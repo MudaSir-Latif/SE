@@ -17,3 +17,29 @@
     font-size: 1.35rem;   
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  /* Main content wrapper to take up available space */
+  .content-wrapper {
+    flex: 1;
+  }
+
+  /* Footer styling */
+  .footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 1rem;
+  }
+
+  .video-size {
+    max-height: 250px;  /* Adjust the height as needed */
+    object-fit: contain;
+    width: 100%;  /* Ensures the video maintains its aspect ratio */
+}
+
+

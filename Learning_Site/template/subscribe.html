@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block subscribe_form %}
+{% if subscription_success %}
+<!-- Subscription Success Message -->
+<div class="container mt-5">
+    <h2>Subscription Successful!</h2>
+    <p>Thank you for subscribing to {{ course_name }}.</p>
+</div>
+{% else %}
+<!-- Subscription Form -->
+<div class="container mt-5">
+    <h2>Subscribe to {{ course_name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.full_name.label_tag }} 
+            {{ form.full_name }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.email.label_tag }} 
+            {{ form.email }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.date_of_birth.label_tag }} 
+            {{ form.date_of_birth }}
+        </div>
+        
+        <input type="hidden" name="course_name" value="{{ course_name }}">
+        <input type="hidden" name="course_type" value="{{ course_type }}">
+        
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
