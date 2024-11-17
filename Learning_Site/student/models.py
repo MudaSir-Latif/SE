@@ -6,6 +6,13 @@ class student(models.Model):
         ('paid', 'Paid'),
         ('unpaid', 'Unpaid'),
     ]
+
+    PAYMENT_METHOD_CHOICES = [
+    ('credit_card', 'Credit Card'),
+    ('paypal', 'PayPal'),
+    ('bank_transfer', 'Bank Transfer'),
+]
+    
     # Make user field optional by using null=True and blank=True
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     full_name = models.CharField(max_length=200)
@@ -14,6 +21,7 @@ class student(models.Model):
     subscripted_at = models.DateTimeField(auto_now_add=True)
     course_name = models.CharField(max_length=100)
     type = models.CharField(max_length=10, choices=COURSE_TYPE_CHOICES, default='unpaid')
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, null=True, blank=True)
 
     def __str__(self):
         return self.full_name

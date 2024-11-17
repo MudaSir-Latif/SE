@@ -23,5 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', views.main),
-    path('student/',include('student.urls')),
+    path('student/',include('student.urls'))
 ]
+if settings.DEBUG:  # Serve media files only during development
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,7 +14,7 @@ def subscribe(request, course_name, course_type):
     if request.method == 'POST':
         form = SubscriptionForm(request.POST)
         if form.is_valid():
-            print("Form is valid, saving...")  # Debugging line
+            print("Form is valid, saving...")  # Debugging linem
             subscription = form.save(commit=False)
             subscription.course_name = course_name  # Set course_name automatically
             subscription.type = course_type  # Set course_type automatically
@@ -22,8 +22,12 @@ def subscribe(request, course_name, course_type):
             # If the user is logged in, assign the current user to the student record
             #if request.user.is_authenticated:
              #    subscription.user = request.user
-            subscription.save()
-            return render(request, 'subscribe.html', {'subscription_success': True, 'course_name': course_name})
+            # Validate payment method for paid courses
+            if course_type == 'paid' and not subscription.payment_method:
+                form.add_error('payment_method', 'Payment method is required for paid courses.')
+            else:
+                subscription.save()
+                return render(request, 'subscribe.html', {'subscription_success': True, 'course_name': course_name})
     else:
         # Pre-fill form with course name and type
         form = SubscriptionForm(initial={'course_name': course_name, 'type': course_type})

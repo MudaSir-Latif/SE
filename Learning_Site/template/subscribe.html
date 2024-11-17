@@ -48,9 +48,38 @@
                 {{ form.type }}
             </div>
 
+            <div class="mb-3">
+                <label for="id_payment_method">Payment Method</label>
+                {{ form.payment_method }}
+                {% if form.payment_method.errors %}
+                    <div class="text-danger">
+                        {{ form.payment_method.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            
+
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
     </div>
 {% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const typeField = document.getElementById('id_type');
+        const paymentMethodField = document.getElementById('id_payment_method');
+
+        function togglePaymentMethod() {
+            if (typeField.value === 'paid') {
+                paymentMethodField.classList.remove('d-none');
+            } else {
+                paymentMethodField.classList.add('d-none');
+            }
+        }
+
+        typeField.addEventListener('change', togglePaymentMethod);
+        togglePaymentMethod();  // Initial check
+    });
+</script>
 {% endblock %}
