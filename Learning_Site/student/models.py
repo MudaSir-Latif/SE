@@ -22,6 +22,8 @@ class student(models.Model):
     course_name = models.CharField(max_length=100)
     type = models.CharField(max_length=10, choices=COURSE_TYPE_CHOICES, default='unpaid')
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, null=True, blank=True)
+    payment_screenshot = models.ImageField(upload_to='payment_screenshots/', null=True, blank=True)  
+
 
     def __str__(self):
         return self.full_name
