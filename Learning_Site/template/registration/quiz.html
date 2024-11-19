@@ -1,15 +1,18 @@
 {% extends "base.html" %}
-
 {% block content %}
 <h1>{{ quiz.title }}</h1>
 <form method="POST">
     {% csrf_token %}
     {% for question in quiz.questions.all %}
-        <p>{{ question.question_text }}</p>
-        <input type="radio" name="question_{{ question.id }}" value="a"> {{ question.option_a }}<br>
-        <input type="radio" name="question_{{ question.id }}" value="b"> {{ question.option_b }}<br>
-        <input type="radio" name="question_{{ question.id }}" value="c"> {{ question.option_c }}<br>
-        <input type="radio" name="question_{{ question.id }}" value="d"> {{ question.option_d }}<br>
+    <div>
+        <p>{{ question.text }}</p>
+        {% for option in question.options.all %}
+        <label>
+            <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}">
+            {{ option.text }}
+        </label>
+        {% endfor %}
+    </div>
     {% endfor %}
     <button type="submit">Submit</button>
 </form>

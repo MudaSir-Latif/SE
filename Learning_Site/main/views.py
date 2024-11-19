@@ -74,9 +74,10 @@ def course_detail(request, course_id):
     context = {
         'course': course,
         'course_contents': course_contents,
+        'student_id': request.user.id,  # Pass user.id as student_id
     }
     
-    return render(request, 'course_detail.html', context)
+    return render(request, 'course_detail.html',context)
 
 
 

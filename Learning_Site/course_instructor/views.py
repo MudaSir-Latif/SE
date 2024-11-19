@@ -126,6 +126,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import CourseContent, VideoWatch
 from django.utils import timezone
 import json
+from django.urls import reverse
+from django.utils.timezone import now  # Ensuring the timezone is imported for watched_at
 
 @csrf_exempt
 def mark_video_watched(request):
@@ -149,6 +151,7 @@ def mark_video_watched(request):
             video_watch.save()
 
             return JsonResponse({'status': 'success'}, status=200)
+            
 
         except CourseContent.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Video not found'}, status=404)
@@ -160,7 +163,18 @@ def mark_video_watched(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
     else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=400)
+        return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=400) 
+            # Check for an associated quiz
+            # quiz = Quiz.objects.filter(course_content=video_content).first()
+            # if quiz:
+            #     quiz_url = reverse('quiz_view', args=[video_content.id])  # Adjust 'quiz_view' to match your URL name
+            #     return JsonResponse({'status': 'success', 'quiz_url': quiz_url}, status=200)
+
+            # # If no quiz is associated, return success without quiz URL
+            # return JsonResponse({'status': 'success', 'message': 'Video marked as watched, no quiz available.'}, status=200)
+
+            
+
 
 
 # @csrf_exempt
@@ -203,10 +217,26 @@ def mark_video_watched(request):
 
 
 
+# def quiz_view(request, content_id):
+#     content = get_object_or_404(CourseContent, id=content_id)
+#     quiz = get_object_or_404(Quiz, course_content=content)
+
+#     if request.method == "POST":
+#         answers = request.POST.dict()
+#         correct_count = 0
+#         for question in quiz.questions.all():
+#             user_answer = answers.get(f'question_{question.id}')
+#             if question.check_answer(user_answer):
+#                 correct_count += 1
+
+#         return render(request, 'quiz_result.html', {'correct_count': correct_count, 'total_questions': quiz.questions.count()})
+
+#     return render(request, 'registration/quiz.html', {'quiz': quiz})
+@login_required
 def quiz_view(request, content_id):
     content = get_object_or_404(CourseContent, id=content_id)
     quiz = get_object_or_404(Quiz, course_content=content)
-
+    
     if request.method == "POST":
         answers = request.POST.dict()
         correct_count = 0
@@ -215,9 +245,12 @@ def quiz_view(request, content_id):
             if question.check_answer(user_answer):
                 correct_count += 1
 
-        return render(request, 'quiz_result.html', {'correct_count': correct_count, 'total_questions': quiz.questions.count()})
+        return render(request, 'quiz_result.html', {
+            'correct_count': correct_count,
+            'total_questions': quiz.questions.count(),
+        })
 
-    return render(request, 'registration/quiz.html', {'quiz': quiz})
+    return render(request, 'quiz.html', {'quiz': quiz})
 
 
 # from .models import Quiz
