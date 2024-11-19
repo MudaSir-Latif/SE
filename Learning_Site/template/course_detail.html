@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% comment %} {% load static %}
+
+{% block body %} 
+<div class="container mt-5">
+    {% block content %}
+    <!-- Course Title -->
+    <h1>{{ course.title }}</h1>
+
+    <!-- Course Description -->
+    <p>{{ course.description }}</p>
+
+    {% if purchase_required %}
+    <div class="alert alert-warning">
+        <strong>You need to purchase this course to view the content.</strong>
+    </div>
+    {% else %}
+
+    <!-- Instructor Info -->
+    <p><strong>Instructor:</strong> {{ course.instructor.user.username }}</p>
+
+    <!-- Duration of the Course -->
+    <p><strong>Duration:</strong> {{ course.duration }}</p>
+
+    <!-- Course Contents -->
+    <h3>Course Contents:</h3>
+    <ul class="list-group mb-4">
+        {% for content in course_contents %}
+        <li class="list-group-item">
+            <strong>{{ content.title }}</strong> ({{ content.content_type }})
+            {% if content.content_type == 'video' %}
+            <script>console.log({{content.id}})</script>
+
+            <video id="video_{{ content.id }}" controls>
+                <source src="{{ content.video.url }}" type="video/mp4">
+            </video>
+            
+            <script>
+                document.getElementById('video_{{ content.id }}').addEventListener('ended', function() {
+                    // Redirect to quiz page after video ends
+                    window.location.href = "{% url 'quiz_view' content.id %}";
+                });
+            </script>
+            
+          
+            {% elif content.content_type == 'pdf' %}
+            <!-- PDF Content -->
+            <div class="mt-2">
+                <a href="{{ content.additional_resources.url }}" target="_blank" class="btn btn-info">View PDF</a>
+            </div>
+            {% elif content.content_type == 'text' %}
+            <!-- Text Content -->
+            <p>{{ content.additional_resources.url }}</p>
+            {% endif %}
+        </li>
+        {% empty %}
+        <li class="list-group-item">No content available for this course.</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    <!-- Button to go back to the main page -->
+    <a href="/" class="btn btn-secondary">Back to All Courses</a>
+    {% endblock content %}
+</div>
+{% endblock body %} 
+ {% endcomment %}
+
+
+ 
+
+ {% load static %}
+ 
+ {% block body %}
+ <div class="container mt-5">
+     {% block content %}
+     <!-- Course Title -->
+     <h1>{{ course.title }}</h1>
+ 
+     <!-- Course Description -->
+     <p>{{ course.description }}</p>
+ 
+     {% if purchase_required %}
+     <div class="alert alert-warning">
+         <strong>You need to purchase this course to view the content.</strong>
+     </div>
+     {% else %}
+ 
+     <!-- Instructor Info -->
+     <p><strong>Instructor:</strong> {{ course.instructor.user.username }}</p>
+ 
+     <!-- Duration of the Course -->
+     <p><strong>Duration:</strong> {{ course.duration }}</p>
+ 
+     <!-- CSRF Token -->
+     <meta name="csrfmiddlewaretoken" content="{{ csrf_token }}">
+ 
+     <!-- Course Contents -->
+     <h3>Course Contents:</h3>
+     <ul class="list-group mb-4">
+         {% for content in course_contents %}
+         <li class="list-group-item">
+             <strong>{{ content.title }}</strong> ({{ content.content_type }})
+ 
+             {% if content.content_type == 'video' %}
+             <!-- Video Content -->
+             <div class="mt-2">
+                 <video id="videoId_{{ content.id }}" width="100%" controls>
+                     <source src="{{ content.video.url }}" type="video/mp4">
+                     Your browser does not support the video tag.
+                 </video>
+                 <p>{{ content.id }}</p>
+                 <p>i am here</p>
+             </div>
+ 
+             {% elif content.content_type == 'pdf' %}
+             <!-- PDF Content -->
+             <div class="mt-2">
+                 <a href="{{ content.additional_resources.url }}" target="_blank" class="btn btn-info">View PDF</a>
+             </div>
+             {% elif content.content_type == 'text' %}
+             <!-- Text Content -->
+             <p>{{ content.additional_resources.url }}</p>
+             {% endif %}
+         </li>
+         {% empty %}
+         <li class="list-group-item">No content available for this course.</li>
+         {% endfor %}
+     </ul>
+ 
+     {% endif %}
+ 
+     <!-- Button to go back to the main page -->
+     <a href="/" class="btn btn-secondary">Back to All Courses</a>
+     {% endblock content %}
+ </div>
+ <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var csrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+        var csrftoken = csrfTokenElement ? csrfTokenElement.content : ''; // Safely fetch CSRF token if available
+    
+        if (!csrfTokenElement) {
+            console.error("CSRF token not found. Ensure it is included in the template.");
+        }
+    
+        // Loop through all course content videos and attach event listeners
+        {% for content in course_contents %}
+        {% if content.content_type == 'video' %}
+        var videoElement = document.getElementById('videoId_{{ content.id }}');
+        console.log("Video element for content id {{ content.id }}: ", videoElement);
+    
+        if (videoElement) {
+            var videoId = "{{ content.id }}"; // Pass the content ID
+            //here i have we are getting student_id
+            var studentId = "{{ student_id }}"; // Rendered in template
+            // Safely fetch student ID if it exists
+            console.log("video id",videoId)
+            console.log("studentid",studentId)
+            // Adding event listener when the video ends
+            videoElement.addEventListener('ended', function () {
+                console.log("Video ended, sending request to mark as watched...");
+    
+                // Send a POST request to mark the video as watched
+                fetch('/mark-video-watched/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken, // Include CSRF token for security
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        'video_id': videoId, // Include the specific video ID
+                        'student_id': studentId // Include the student's profile ID
+                    })
+                })
+                
+            
+                .then(response => {
+                    if (response.ok) {
+                        alert('Video marked as watched!'); // Notify user on success
+                    } else {
+                        console.error('Failed to mark video as watched');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error); // Handle errors in the request
+                });
+            });
+        } else {
+            console.error("Video element with ID videoId_{{ content.id }} not found.");
+        }
+        {% endif %}
+        {% endfor %}
+    });
+    </script>
+    
+ 
+ {% endblock body %}
