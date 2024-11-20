@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from imp import reload
+from importlib import reload
 from django.http import JsonResponse
 from django.shortcuts import render # Import the Course model
 from django.shortcuts import render, get_object_or_404
