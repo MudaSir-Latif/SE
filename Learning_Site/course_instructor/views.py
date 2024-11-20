@@ -22,6 +22,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.core.exceptions import PermissionDenied
+from django.db.models import Prefetch
 
 # Create a new course (Instructor only)
 @login_required(login_url='registration/login/')
@@ -40,6 +41,27 @@ def create_course(request):
         form = CourseForm()
 
     return render(request, 'registration/create_course.html', {'form': form})
+
+# Category of påaid and unpaid courses
+
+def filter_courses(request):
+    course_type = request.GET.get('type', 'all')  # Get course type from query params
+    
+    # Prefetch related course contents, prioritizing the first video
+    content_prefetch = Prefetch(
+        'contents',
+        queryset=CourseContent.objects.all().order_by('order')
+    )
+
+    if course_type == 'paid':
+        courses = Course.objects.filter(course_type='paid').prefetch_related(content_prefetch)
+    elif course_type == 'unpaid':
+        courses = Course.objects.filter(course_type='unpaid').prefetch_related(content_prefetch)
+    else:
+        courses = Course.objects.all().prefetch_related(content_prefetch)  # Default to all courses
+
+    return render(request, 'course_list.html', {'courses': courses, 'selected_type': course_type})
+
 
 
 

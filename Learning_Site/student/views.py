@@ -20,8 +20,8 @@ def subscribe(request, course_name, course_type):
             subscription.type = course_type  # Set course_type automatically
             
             # If the user is logged in, assign the current user to the student record
-            # if request.user.is_authenticated:
-            #      subscription.user = request.user
+            if request.user.is_authenticated:
+                  subscription.user = request.user
             if course_type == 'paid':
                 if not subscription.payment_method:
                     form.add_error('payment_method', 'Payment method is required for paid courses.')

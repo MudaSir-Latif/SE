@@ -44,8 +44,9 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Courses</a></li>
-              <li><a class="dropdown-item" href="{% url 'paid_courses' %}">Paid Courses</a></li>
-              <li><a class="dropdown-item" href="{% url 'unpaid_courses' %}">Unpaid Courses</a></li>
+              <li><a class="dropdown-item" href="{% url 'filter_courses' %}?type=paid">Paid Courses</a></li>
+              <li><a class="dropdown-item" href="{% url 'filter_courses' %}?type=unpaid">Unpaid Courses</a></li>
+
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
             </ul>
@@ -70,6 +71,9 @@
     {% endblock %}
 
     {% block subscribe_form %}
+    {% endblock %}
+
+    {% block course_type %}
     {% endblock %}
   </main>
 

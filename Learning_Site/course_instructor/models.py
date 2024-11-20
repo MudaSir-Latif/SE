@@ -5,12 +5,19 @@ from datetime import timedelta
 from main.models import Profile
 
 class Course(models.Model):
+    COURSE_TYPE_CHOICES = [
+        ('paid', 'Paid'),
+        ('unpaid', 'Unpaid'),
+    ]
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     duration = models.DurationField(default=timedelta(days=30))
     instructor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='courses_taught')
+    course_type = models.CharField(max_length=10, choices=COURSE_TYPE_CHOICES, default='unpaid')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.title

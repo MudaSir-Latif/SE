@@ -5,7 +5,7 @@ from .models import Quiz
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['title', 'description', 'duration']  # Fields to be edited by the instructor
+        fields = ['title', 'description', 'duration', 'course_type']  # Fields to be edited by the instructor
 
 
 class CourseContentForm(forms.ModelForm):

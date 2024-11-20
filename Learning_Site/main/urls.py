@@ -4,6 +4,8 @@ from .views import if_is_instructor,main_page,course_detail
 from django.contrib.auth import views as auth_views
 from course_instructor.views import mark_video_watched
 from .views import your_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -14,4 +16,4 @@ urlpatterns = [
     path('mark-video-watched/', mark_video_watched, name='mark_video_watched'),
      path('your-view/', your_view, name='your_view'),
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
