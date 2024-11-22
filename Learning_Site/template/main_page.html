@@ -26,7 +26,8 @@
           <p class="card-text">{{ course.description|truncatewords:20 }}</p>
           <div class="d-flex justify-content-between mb-3">
             <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">View Course</a>
-            <a href="#" class="btn btn-warning btn-sm">Subscribe</a> <!-- Replaced 'Buy' with 'Subscribe' -->
+            <a href="{% url 'subscribe' course.title course.course_type %}" class="btn btn-warning btn-sm">Subscribe</a>
+
           </div>
 
           <!-- Course Videos -->

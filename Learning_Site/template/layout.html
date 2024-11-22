@@ -43,7 +43,7 @@
               Categories
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Courses</a></li>
+              <li><a class="dropdown-item" href="{% url 'filter_courses' %}">Courses</a></li>
               <li><a class="dropdown-item" href="{% url 'filter_courses' %}?type=paid">Paid Courses</a></li>
               <li><a class="dropdown-item" href="{% url 'filter_courses' %}?type=unpaid">Unpaid Courses</a></li>
 
@@ -74,6 +74,9 @@
     {% endblock %}
 
     {% block course_type %}
+    {% endblock %}
+
+    {% block body %}
     {% endblock %}
   </main>
 
