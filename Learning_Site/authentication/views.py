@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 73fa4e4155251e7528ebd7934cf4982ffaed959b
 from django.shortcuts import render, redirect
 from .form import UserRegistrationForm
 from django.contrib.auth import login

@@ -27,6 +27,12 @@ from course_instructor.views import CustomLoginView  # Import the custom login v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
+=======
+    path('main/', views.main),
+    path('student/',include('student.urls')),
+    path('',include(main_app_urls)),
+>>>>>>> 73fa4e4155251e7528ebd7934cf4982ffaed959b
     path('',include(course_instructor_urls)),
     path('student/',include('student.urls')),
     path('authentication/',include('authentication.urls')),
