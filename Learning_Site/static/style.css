@@ -1,6 +1,6 @@
-
+* {color: red;}
 .name{
-    color: aqua;
+    color: rgb(255, 132, 0);
     max-width: 20%;
     min-width: 15%;
     font-family: 'Montserrat', sans-serif; 

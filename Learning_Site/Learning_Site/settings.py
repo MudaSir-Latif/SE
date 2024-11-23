@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'student',
     'main',
-    'course_instructor',]
+    'course_instructor',
+    'authentication']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

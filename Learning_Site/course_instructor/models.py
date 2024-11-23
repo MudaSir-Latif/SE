@@ -39,11 +39,6 @@ class CourseContent(models.Model):
             CourseContent.objects.filter(course=self.course, is_first_video=True).update(is_first_video=False)
         super(CourseContent, self).save(*args, **kwargs)
 
-class Subscription(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    subscribed_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return f"{self.user.username} - {self.course.title}"
 

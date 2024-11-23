@@ -1,9 +1,9 @@
 from django import forms
-from .models import student
+from .models import Student
 
 class SubscriptionForm(forms.ModelForm):
     class Meta:
-        model = student
+        model = Student
         fields = ['user', 'full_name', 'email', 'date_of_birth', 'course_name', 'type', 'payment_method', 'payment_screenshot']
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
