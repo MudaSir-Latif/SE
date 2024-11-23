@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.contrib import admin
 
 # Register your models here.
-from .models import Course,CourseContent,Subscription
+from .models import Course,CourseContent
 from django.contrib import admin
 from .models import Quiz, Question,VideoWatch
 
@@ -36,7 +36,6 @@ class PurchaseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Purchase,PurchaseAdmin)
-admin.site.register(Subscription)
 
 
 

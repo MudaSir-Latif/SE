@@ -20,16 +20,23 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from course_instructor import urls as course_instructor_urls
+from authentication import urls
 from main import urls as main_app_urls
 from django.contrib.auth.views import LoginView
 from course_instructor.views import CustomLoginView  # Import the custom login view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
+=======
     path('main/', views.main),
     path('student/',include('student.urls')),
     path('',include(main_app_urls)),
+>>>>>>> 3ebd0bd694fbce12bbd0ab089bba42c4a3d99d51
     path('',include(course_instructor_urls)),
+    path('student/',include('student.urls')),
+    path('authentication/',include('authentication.urls')),
+    path('',include('main.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

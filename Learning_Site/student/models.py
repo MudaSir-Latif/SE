@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class student(models.Model):
+class Student(models.Model):
     COURSE_TYPE_CHOICES = [
         ('paid', 'Paid'),
         ('unpaid', 'Unpaid'),
@@ -27,3 +27,13 @@ class student(models.Model):
 
     def __str__(self):
         return self.full_name
+
+class Subscription(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course_title = models.CharField(max_length=100)
+    course_type = models.CharField(max_length=10, choices=Student.COURSE_TYPE_CHOICES)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.full_name} - {self.course_title}"

@@ -1,4 +1,9 @@
 from django.contrib import admin
+<<<<<<< HEAD
+from .models import Profile_main
+
+admin.site.register(Profile_main)
+=======
 from django.contrib.auth.admin import UserAdmin
 from .models import User, StudentProfile, CreatorProfile
 
@@ -17,3 +22,4 @@ class StudentProfileAdmin(admin.ModelAdmin):
 @admin.register(CreatorProfile)
 class CreatorProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'experience', 'course_type']
+>>>>>>> 3ebd0bd694fbce12bbd0ab089bba42c4a3d99d51
