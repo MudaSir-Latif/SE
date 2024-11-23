@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -15,7 +14,6 @@ class Profile_main(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ({self.role})"
-=======
 # authentication/models.py
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -54,4 +52,3 @@ class CreatorProfile(models.Model):
 
     def __str__(self):
         return f"Creator Profile: {self.user.username}"
->>>>>>> 3ebd0bd694fbce12bbd0ab089bba42c4a3d99d51
