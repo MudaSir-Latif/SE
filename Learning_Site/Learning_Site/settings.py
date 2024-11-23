@@ -127,6 +127,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
+
+
 # Redirect to home page after login
 LOGIN_REDIRECT_URL = '/create_course/'
 
