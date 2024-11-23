@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student, Subscription
 from .forms import SubscriptionForm
 from course_instructor.models import Course
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 def unpaid_courses(request):
     return render(request, 'content.html')
@@ -9,6 +11,7 @@ def unpaid_courses(request):
 def paid_courses(request):
     return render(request, 'content.html')
 
+@login_required
 def subscribe(request, course_name, course_type):
     print(f"Course Name: {course_name}, Course Type: {course_type}")  # Debugging line
 
@@ -65,6 +68,7 @@ def subscribe(request, course_name, course_type):
 def home(request):
     return render(request,'content.html')
 
+@login_required
 def course_detail(request, course_id):
     # Fetch the course
     course = get_object_or_404(Course, id=course_id)

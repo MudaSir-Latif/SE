@@ -131,12 +131,15 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
 # Redirect to home page after login
-LOGIN_REDIRECT_URL = '/create_course/'
+#LOGIN_REDIRECT_URL = '/create_course/'
 
 # LOGIN_REDIRECT_URL = '/create_course/'
-LOGIN_URL = '/registration/login/'
+#LOGIN_URL = '/registration/login/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/authentication/login/'  # Adjust this based on your URL patterns
+
+#LOGIN_REDIRECT_URL = '/student/home/'  # Default redirect after login
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
