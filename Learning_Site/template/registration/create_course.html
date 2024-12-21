@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block 'title' %}
+Course Management
+{% endblock 'title' %}
+
+{% block content %}
+ <div class="container mt-4 cr_c">
+
+  <form method="post">
+    {% csrf_token %} 
+    {{ form.as_p }} 
+    <div class="mb-3">
+      <button type="button" class="btn btn-primary me-2" 
+      onclick="window.location.href=''">
+      Add Content
+  </button>
+    </div>  
+    <div class="text-center">
+      <button class="btn btn-success my-2" type="submit">Create Course</button>
+    </div>
+  </form>
+</div> 
+
+{% endblock content %}

@@ -1,0 +1,1110 @@
+
+/* main page */
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  color: #333;
+  /* background-image: url('https://images.unsplash.com/photo-1498049860654-af1a5c566876?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b25saW5lJTIwbGVhcm5pbmclMjB3ZWJzaXRlfGVufDB8fDB8fHww');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;  */
+}
+
+/* Navbar Styles */
+.navbar {
+  border-bottom: 1px solid black;
+  padding: 10px 20px;
+}
+
+.navbar .navbar-toggler-icon {
+  color: white;
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #6363cfb6;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+  color: #131414;
+}
+
+.navbar .dropdown-menu {
+  background-color: #17a2b8;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  color: #fff;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+  background-color: #138496;
+}
+
+/* Logo Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  max-height: 100px;
+  margin-right: 15px;
+}
+
+/* Center the search form */
+.navbar .navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styling the form itself */
+.form-inline {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.form-inline .form-control {
+  flex-grow: 1;
+  height: calc(2.25rem + 2px); /* Match Bootstrap's default input height */
+  margin-right: 10px;
+}
+
+.form-inline .btn-outline-success {
+  height: calc(2.25rem + 2px); /* Match Bootstrap's default button height */
+  color: whitesmoke;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 1rem;
+}
+
+.form-inline .btn-outline-success:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Navbar Item Spacing */
+.navbar-nav .nav-item {
+  margin-right: 15px;
+}
+
+/* Main Content */
+.container-fluid {
+  padding-bottom: 15pt;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+}
+
+/* Footer Styles */
+.footer {
+  border-top: 1px solid black;
+  color: black;
+  padding: 20px 0;
+}
+
+.footer .text-start h5 {
+  font-size: 1.8rem;
+  padding-left: 35px;
+  font-weight: bold;
+}
+
+.footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.footer ul li a {
+  color: #6363cfb6;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  color: rgba(103, 107, 108, 0.709);
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: cursive;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .form-inline {
+    width: 100%;
+  }
+
+  .form-inline .form-control {
+    margin-bottom: 10px;
+    flex-grow: unset;
+    width: 100%;
+  }
+
+  .logo-container {
+    justify-content: center;
+  }
+
+  .logo {
+    max-height: 40px;
+  }
+}
+
+
+/* General Styling */
+.ma_p body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.ma_p {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+
+/* Header */
+.ma_p h1.text-center {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #343a40;
+  margin: 0;
+}
+
+.ma_p .d-flex {
+  display: flex;
+}
+
+.ma_p .flex-grow-1 {
+  flex-grow: 1;
+}
+
+.ma_p .btn {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color .2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.ma_p .btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.ma_p .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.ma_p .btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+}
+
+.ma_p .btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* Course Cards */
+.ma_p .card {
+  border-color: black;
+  max-height: 1000px;
+  /* transition: transform 0.12s ease-in-out; */
+}
+
+.ma_p .card:hover {
+  transform: translateY(-5px);
+}
+
+
+.ma_p .card-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+
+
+/* Video Display */
+.ma_p video {
+  width: 100%;
+  height: 190px;
+  border-radius: 5px;
+  border-color: black;
+  margin-top: 10px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+
+/* Subscribe Page Styles (sub class) */
+.sub {
+  max-width: 800px;
+  margin: 50px auto; /* Centers the container horizontally */
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #774a4a; /* Adds border around the container */
+}
+
+/* Ensures that the form controls have smooth transitions */
+.sub .mb-3 input,
+.sub .mb-3 select,
+.sub .mb-3 textarea {
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease; /* Smoother transition */
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Focus state for input fields */
+.sub .mb-3 input:focus,
+.sub .mb-3 select:focus,
+.sub .mb-3 textarea:focus {
+  border-color: #007bff; /* Focused color */
+  box-shadow: 0 0 3px rgba(6, 43, 83, 0.5);
+}
+
+/* Heading styles */
+.sub h2 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Control (input/select) styles */
+.sub .form-control {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.sub .form-control:focus {
+  border-color: #007bff; /* Border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue shadow on focus */
+}
+
+/* Primary Button styles */
+.sub .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto; /* Centers the button horizontally */
+  width: auto;
+  max-width: 300px; /* Maximum width for buttons */
+}
+
+.sub .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Success message container */
+.sub .container {
+  min-width: 650px;
+}
+
+/* Error message styles */
+.sub .text-danger {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+}
+
+/* Styling for hidden payment-related fields */
+.sub .d-none {
+  display: none;
+}
+
+/* Ensure responsive design */
+@media (max-width: 768px) {
+  .sub {
+    padding: 20px;
+  }
+
+  .sub h2 {
+    font-size: 1.5rem;
+  }
+
+  .sub .btn-primary {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+
+  .sub .form-control {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Course Creator Page Styles (cr_c class) */
+.cr_c {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #774a4a;
+}
+
+.cr_c .btn-primary {
+  background-color: rgb(53, 192, 185);
+  border-color: #9abee6;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cr_c .btn-primary:hover {
+  background-color: #0fe4dd;
+  border-color: #004085;
+}
+
+.cr_c .btn-success {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cr_c .btn-success:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.cr_c .form-control {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.cr_c .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.cr_c .text-danger {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+}
+
+.cr_c .form-group {
+  margin-bottom: 20px;
+}
+
+.cr_c .form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cr_c .mb-3 {
+  margin-bottom: 15px;
+}
+
+.cr_c .mb-3 input,
+.cr_c .mb-3 select,
+.cr_c .mb-3 textarea {
+  border: 1px solid #ccc;
+  transition: border-color 0.9s ease;
+}
+
+.cr_c .mb-3:active input,
+.cr_c .mb-3:active select,
+.cr_c .mb-3:active textarea {
+  border-color: #095bb1;
+}
+
+/* Focus state for form fields */
+.cr_c .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Text and border color adjustments for placeholder and text */
+.cr_c .form-control:focus::placeholder {
+  color: #007bff;
+}
+
+.cr_c .d-none {
+  display: none;
+}
+
+
+
+/* course edit */
+
+.e_c {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #774a4a;
+  /* Adds border around the container */
+}
+
+.e_c h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.e_c .form-label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.e_c .form-control {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.e_c .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.e_c .btn-primary {
+  background-color: rgb(53, 192, 185);
+  border-color: #9abee6;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-flexbox;
+}
+
+.e_c .btn-primary:hover {
+  background-color: #0fe4dd;
+  border-color: #004085;
+}
+
+.e_c .btn-secondary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
+.e_c .btn-secondary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.e_c .mt-3 {
+  margin-top: 20px;
+}
+
+.e_c .text-danger {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+}
+
+.e_c .form-group {
+  margin-bottom: 20px;
+}
+
+.e_c .d-none {
+  display: none;
+}
+
+
+/* edit course content */
+
+.e_c_c {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #774a4a;
+  /* Adds border around the container */
+}
+
+.e_c_c h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.e_c_c video {
+  width: 400px !important;
+  height: 250px !important;
+}
+
+.e_c_c table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.e_c_c th,
+.e_c_c td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.e_c_c th {
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.e_c_c input[type="text"],
+.e_c_c input[type="number"],
+.e_c_c input[type="file"],
+.e_c_c textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+
+.tile {
+  min-width: 50px;
+  /* Set a reasonable minimum width */
+  width: auto;
+  /* Allow the width to adapt */
+}
+
+
+.e_c_c input[type="text"]:focus,
+.e_c_c input[type="number"]:focus,
+.e_c_c input[type="file"]:focus,
+.e_c_c textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.e_c_c .btn {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.e_c_c .btn-primary,
+.e_c_c .btn-danger {
+  color: black;
+  /* Set the text color to black */
+  border: 2px solid #000;
+  /* Add a border */
+  box-shadow: none;
+  /* Remove box shadow */
+  padding: 10px 20px;
+  /* Same padding for both buttons */
+  font-size: 1.1rem;
+  /* Same font size for both buttons */
+  display: inline-block;
+  /* Ensures they align correctly */
+  width: 100px;
+  /* Makes sure buttons are not stretched or shrink */
+  text-align: center;
+  /* Ensures the text is centered */
+  border-radius: 5px;
+  /* Rounded borders */
+}
+
+.e_c_c .btn-primary {
+  background-color: #00ff48;
+  /* Green background */
+}
+
+.e_c_c .btn-primary:hover {
+  background-color: #04b40a;
+  /* Darker green on hover */
+}
+
+.e_c_c .btn-danger {
+  background-color: #ee4354;
+  /* Red background */
+}
+
+.e_c_c .btn-danger:hover {
+  background-color: #c82333;
+  /* Darker red on hover */
+}
+
+.e_c_c .btn-primary {
+  margin-bottom: 20px;
+  /* Add a gap between the Update and Delete buttons */
+}
+
+
+
+.e_c_c .btn-secondary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+}
+
+.e_c_c .btn-secondary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.e_c_c .mt-3 {
+  margin-top: 20px;
+}
+
+
+
+/* create quiz */
+
+/* Quiz Creation Page Styles (.cr_q class) */
+.cr_q {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #774a4a;
+}
+
+.cr_q h1 {
+  display: flex;
+  justify-content: center;
+  /* Centers the heading horizontally */
+  align-items: center;
+  /* Centers the heading vertically if needed */
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+  line-height: 1.2;
+}
+
+.cr_q h1 span {
+  color: #333;
+}
+
+
+
+/* Buttons */
+.cr_q .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
+.cr_q .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+
+/* Form Controls */
+.cr_q .form-control {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.cr_q .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Form Group and Labels */
+.cr_q .form-group {
+  margin-bottom: 20px;
+}
+
+.cr_q .form-group label {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Card Styling for Questions */
+.cr_q .card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cr_q .card-body {
+  padding: 15px;
+}
+
+/* Miscellaneous */
+.cr_q .text-danger {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+}
+
+
+/* add content page */
+
+.a_u_c {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+}
+
+.a_u_c .container {
+  min-width: 650px;
+}
+
+.a_u_c .form-group {
+  margin-bottom: 20px;
+}
+
+.a_u_c .form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.a_u_c .mb-3 input,
+.a_u_c .mb-3 select,
+.a_u_c .mb-3 textarea,
+.a_u_c .form-control {
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.9s ease;
+}
+
+.a_u_c .mb-3:active input,
+.a_u_c .mb-3:active select,
+.a_u_c .mb-3:active textarea,
+.a_u_c .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.a_u_c .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
+}
+
+.a_u_c .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.a_u_c .text-danger {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+}
+
+.a_u_c .messages .alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.a_u_c .d-none {
+  display: none;
+}
+
+
+
+/* quiz page */
+
+/* Reset counter for questions in the form */
+.q_p {
+  counter-reset: question-counter;
+  margin: 40px;
+  padding: 30px;
+  border: 1.4px solid #333;
+  border-radius: 7px;
+}
+
+/* Center main heading */
+.q_p h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Styling for each question */
+.q_p .question {
+  counter-increment: question-counter;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+/* Add question numbers dynamically */
+.q_p .question p::before {
+  content: "Q" counter(question-counter) ". ";
+  font-weight: bold;
+  margin-right: 10px;
+  color: #333;
+}
+
+.q_p .question p {
+  margin-bottom: 10px;
+  padding: 0 5px;
+}
+
+/* Indentation and spacing for options */
+.q_p .question div {
+  margin-left: 20px;
+  padding: 5px 0;
+}
+
+.q_p .question div label {
+  font-size: 1rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.q_p .question div label:hover {
+  background-color: #7cabd448;
+  border-radius: 5px;
+}
+
+.q_p .question div label input {
+  margin-right: 10px;
+}
+
+
+/* Apply green border when any radio button inside a question is checked */
+.q_p .question:has(input[type="radio"]:checked) {
+  border: 3px solid #28a745; /* Green border */
+}
+
+
+/* Style for the Submit button */
+.q_p button[type="submit"] {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hover effect for the Submit button */
+.q_p button[type="submit"]:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .q_p .question {
+    padding: 10px;
+  }
+
+  .q_p .question div {
+    margin-left: 10px;
+  }
+
+  .q_p button[type="submit"] {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+
+/* quiz result page */
+
+.q_r {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #774a4a;
+}
+
+.q_r h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.q_r p {
+  font-size: 1rem;
+  color: #b47d7d;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.q_r .passed {
+  font-size: 1rem;
+  color: #7db482;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.q_r .btn-container {
+  display: flex;
+  justify-content: space-between; /* Ensures space between buttons */
+  gap: 15px; /* Adds spacing between buttons */
+  margin-top: 20px;
+}
+
+.q_r .btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Adjusts button width */
+  text-align: center;
+  display: inline-block;
+}
+
+/* Success button */
+.q_r .btn-success {
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+}
+
+.q_r .btn-success:hover {
+  background-color: #218838;
+}
+
+/* Primary button */
+.q_r .btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+}
+
+.q_r .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
+.q_r .q_r p {
+  font-size: 1rem;
+  color: #dc3545;
+  font-weight: 500;
+  text-align: center;
+}
+
