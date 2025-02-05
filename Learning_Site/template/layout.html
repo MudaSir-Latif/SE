@@ -55,9 +55,9 @@
         </ul>
         
         <!-- Updated Search Bar -->
-        <form class=" form-inline d-flex" role="search" method="get">
+        <form class="abu_form " role="search" method="get">
           <input
-            class="form-control me-2"
+            class="form me-2"
             type="search"
             name="q"
             placeholder="Search for courses"
@@ -103,21 +103,40 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 text-start">
-          <h5 class="text-dark">EduLearn</h5>
+          <h5 >EduLearn</h5>
           <p class="pp">Empowering your learning journey with the best resources.</p>
         </div>
         <div class="col-12 text-center">
           <ul class="list-inline">
-            <li class="list-inline-item"><a href="#" class="text-dark">About Us</a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark">Contact Us</a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="#" >About Us</a></li>
+            <li class="list-inline-item"><a href="#" >Contact Us</a></li>
+            <li class="list-inline-item"><a href="#" >Privacy Policy</a></li>
           </ul>
-          <p class="mb-0 text-dark">&copy; 2024 Learning Site. All rights reserved.</p>
+          <p class="rights " style="padding: 0 ">&copy; 2024 Learning Site. All rights reserved.</p>
         </div>
       </div>
     </div>
   </footer>
 
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector('input[type="search"]');
+
+  searchInput.addEventListener("input", () => {
+    // Check if the input is empty
+    if (searchInput.value === '') {
+      // Trigger a reset or reload courses
+      fetch(window.location.pathname)
+        .then(response => response.text())
+        .then(html => {
+          document.body.innerHTML = html; // Reload the main page content
+        });
+    }
+  });
+});
+
+</script>
 
 </html>

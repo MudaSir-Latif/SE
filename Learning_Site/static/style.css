@@ -6,7 +6,6 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: white;
   color: #333;
   /* background-image: url('https://images.unsplash.com/photo-1498049860654-af1a5c566876?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b25saW5lJTIwbGVhcm5pbmclMjB3ZWJzaXRlfGVufDB8fDB8fHww');
   background-size: cover;
@@ -19,6 +18,7 @@ body {
 .navbar {
   border-bottom: 1px solid black;
   padding: 10px 20px;
+  box-shadow: 0 1px 5px rgb(100, 100, 100);
 }
 
 .navbar .navbar-toggler-icon {
@@ -36,15 +36,15 @@ body {
 }
 
 .navbar .dropdown-menu {
-  background-color: #17a2b8;
-}
-
-.navbar .dropdown-menu .dropdown-item {
-  color: #fff;
+  background-color: white;
+  border: 1px solid #000;
 }
 
 .navbar .dropdown-menu .dropdown-item:hover {
-  background-color: #138496;
+  color: black;
+}
+.navbar .dropdown-menu .dropdown-item {
+  color: #6363cfb6;
 }
 
 /* Logo Styles */
@@ -66,28 +66,40 @@ body {
 }
 
 /* Styling the form itself */
-.form-inline {
-  display: flex;
-  align-items: center;
-  margin: 0;
+
+.abu_form{
+  margin-right: auto;
 }
 
-.form-inline .form-control {
-  flex-grow: 1;
-  height: calc(2.25rem + 2px); /* Match Bootstrap's default input height */
-  margin-right: 10px;
-}
-
-.form-inline .btn-outline-success {
-  height: calc(2.25rem + 2px); /* Match Bootstrap's default button height */
-  color: whitesmoke;
-  background-color: #007bff;
-  border-color: #007bff;
+.form {
+  height: 2.1rem; /* Slightly increased for better usability */
+  width: 400px;
+  padding: 0 15px; /* Added padding for better spacing */
+  border-radius: 25px; /* More rounded */
+  border: 2px solid black; /* Unified border property */
   font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+  
 }
 
-.form-inline .btn-outline-success:hover {
-  background-color: #0056b3;
+.form:focus {
+  border-color: #3a3a3a;
+  box-shadow: 0 0 8px rgba(5, 5, 5, 0.6); /* Soft glow effect */
+  background-color: #fff;
+  transform: scale(1.05); /* Slight enlargement for better focus visibility */
+}
+
+ .btn-outline-success {
+  height: calc(2rem + 2px); /* Match Bootstrap's default button height */
+  color: whitesmoke;
+  background-color: rgb(0, 0, 0);
+  font-size: 1rem;
+  border-radius: 20px;
+}
+
+.btn-outline-success:hover {
+  background-color: rgba(0, 0, 0, 0.726);
   color: white;
 }
 
@@ -96,25 +108,13 @@ body {
   margin-right: 15px;
 }
 
-/* Main Content */
-.container-fluid {
-  padding-bottom: 15pt;
-}
-
-h5 {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-p {
-  font-size: 1rem;
-}
 
 /* Footer Styles */
 .footer {
   border-top: 1px solid black;
-  color: black;
-  padding: 20px 0;
+  color: white;
+  background-color: black;
+  padding-top: 10px;
 }
 
 .footer .text-start h5 {
@@ -133,21 +133,21 @@ p {
   margin-right: 10px;
 }
 
+.footer .rights{
+  color: gray;
+}
+
 .footer ul li a {
-  color: #6363cfb6;
-  text-decoration: none;
+  color: rgb(115, 115, 220);
+  text-decoration: underline;
+  transition: transform 0.25s, color 0.25s; 
 }
 
 .footer ul li a:hover {
-  text-decoration: underline;
+  color: lightblue;
+  transform: translateY(-10px); 
 }
 
-.footer p {
-  color: rgba(103, 107, 108, 0.709);
-  font-size: 1.1rem;
-  font-weight: bold;
-  font-family: cursive;
-}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -180,107 +180,111 @@ p {
 }
 
 
-/* General Styling */
-.ma_p body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-}
+/* main page */
 
+/* General Styling */
 .ma_p {
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 20px;
 }
 
+/* Carousel */
+.ma_p .carousel-inner {
+  display: block;
+  flex-direction: column;
+  color: red;
+}
 
-/* Header */
-.ma_p h1.text-center {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #343a40;
+.ma_p .carousel-item {
+  padding:  0 50px ;
+}
+
+.ma_p .card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s, box-shadow 0.25s;
+  max-height: 475px;
+  width: 310px;
+  display: block;
+}
+
+
+.ma_p .card-text{
+  text-decoration: underline;
+}
+
+.ma_p .card-title{
   margin: 0;
 }
 
-.ma_p .d-flex {
-  display: flex;
-}
-
-.ma_p .flex-grow-1 {
-  flex-grow: 1;
-}
-
-.ma_p .btn {
-  font-size: 0.9rem;
-  padding: 8px 12px;
-  border-radius: 5px;
-  transition: background-color .2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.ma_p .btn-primary {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
-
-.ma_p .btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.ma_p .btn-warning {
-  background-color: #ffc107;
-  color: #212529;
-  border: none;
-}
-
-.ma_p .btn-warning:hover {
-  background-color: #e0a800;
-}
-
-/* Course Cards */
-.ma_p .card {
-  border-color: black;
-  max-height: 1000px;
-  /* transition: transform 0.12s ease-in-out; */
+.ma_p .card-body{
+  padding-bottom: 0;
 }
 
 .ma_p .card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.02);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-
-.ma_p .card-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 10px;
-}
-
-
-
-/* Video Display */
-.ma_p video {
+/* Video Styling */
+.ma_p .card-body video {
+  height: 200px;
   width: 100%;
-  height: 190px;
   border-radius: 5px;
-  border-color: black;
-  margin-top: 10px;
-  object-fit: cover;
-  overflow: hidden;
 }
+
+/* Carousel Control Styling */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  margin: 20px;
+  background-color: transparent; 
+  filter: invert(100%) sepia(0%) saturate(0%) brightness(0%) contrast(100%);
+}
+
+.ma_p .carousel-control-prev {
+  left: -5%; /* Move further to the left */
+}
+
+.ma_p .carousel-control-next {
+  right: -5%; /* Move further to the right */
+}
+
+.ma_p .button_ma_p{
+  padding: 0px 14px 14px;
+}
+
+.ma_p .btn_ins{
+  background-color: rgb(99, 196, 64);
+}
+.ma_p .btn_ins:hover{
+  background-color: rgb(51, 132, 22);
+}
+
+
+
 
 
 /* Subscribe Page Styles (sub class) */
 .sub {
-  max-width: 800px;
-  margin: 50px auto; /* Centers the container horizontally */
+  width: 500px;
+  margin: 30px auto; /* Centers the container horizontally */
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #774a4a; /* Adds border around the container */
+  border: 1px solid #774a4a;
 }
+
+.sub h2 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center; 
+}
+
 
 /* Ensures that the form controls have smooth transitions */
 .sub .mb-3 input,
@@ -289,8 +293,10 @@ p {
   border: 1px solid #ccc;
   transition: border-color 0.3s ease; /* Smoother transition */
   font-size: 1rem;
-  padding: 10px;
   border-radius: 5px;
+  height: 100%;
+  width: 100%; /* Full width inside the container */
+  max-width: 416px; /* Maintain consistent width */
 }
 
 /* Focus state for input fields */
@@ -298,34 +304,15 @@ p {
 .sub .mb-3 select:focus,
 .sub .mb-3 textarea:focus {
   border-color: #007bff; /* Focused color */
-  box-shadow: 0 0 3px rgba(6, 43, 83, 0.5);
-}
-
-/* Heading styles */
-.sub h2 {
-  color: #333;
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Form Control (input/select) styles */
-.sub .form-control {
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 13px rgba(6, 43, 83, 0.5);
 }
 
 .sub .form-control:focus {
   border-color: #007bff; /* Border color on focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue shadow on focus */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
 
-/* Primary Button styles */
+/* Primary Button styles - centers only the button */
 .sub .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
@@ -333,10 +320,8 @@ p {
   font-size: 1.1rem;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 auto; /* Centers the button horizontally */
-  width: auto;
-  max-width: 300px; /* Maximum width for buttons */
+  margin: 20px 145px; /* Centers the button horizontally */
+  max-width: 300px; /* Limit the button width */
 }
 
 .sub .btn-primary:hover {
@@ -361,31 +346,281 @@ p {
   display: none;
 }
 
-/* Ensure responsive design */
+
+
+/* Profile Page Styling */
+.profile {
+  padding: 20px;
+}
+
+.profile h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.profile .card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.profile .card:hover {
+  transform: translateY(-10px);
+}
+
+.profile .card-text {
+  text-decoration: underline;
+}
+
+.profile .card-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.profile .card-body {
+  font-size: 1rem;
+  color: #555;
+}
+
+.profile .card-footer {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.profile .card-footer p {
+  margin: 0;
+}
+
+.profile .button_ma_p a {
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.profile .carousel-item {
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile .carousel-control-prev-icon, 
+.profile .carousel-control-next-icon {
+  background-color: #000;
+}
+
+.profile .carousel .carousel-inner {
+  padding: 20px 0;
+}
+
+.profile .carousel-item .col-md-4 {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.profile .card-body video {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.profile .card-body p.mt-2 {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Adjust Button Styles */
+.profile button.btn-sm {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+}
+
+.profile .carousel-item img {
+  border-radius: 10px;
+}
+
+.profile .text-center {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
-  .sub {
-    padding: 20px;
+  .profile .carousel-item .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
-  .sub h2 {
-    font-size: 1.5rem;
-  }
-
-  .sub .btn-primary {
-    font-size: 1rem;
-    padding: 8px 15px;
-  }
-
-  .sub .form-control {
-    font-size: 0.9rem;
+  .profile .carousel-inner {
+    margin-top: 20px;
   }
 }
+
+@media (min-width: 768px) {
+  .profile .carousel-item .col-md-4 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+}
+
+.profile .btn {
+  margin: 10px auto;
+  color: white;
+  background-color: #007bff;
+}
+
+.profile .btn:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05); 
+}
+
+
+
+
+
+
+
+
+
+/* Course Details */
+.c_detail {
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.content-table th, .content-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.content-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.content-table tr:hover {
+  background-color: #f0f0f0;
+}
+
+.content-table td:first-child {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Content Item Clickable */
+.content-item {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.content-item:hover {
+  text-decoration: underline;
+}
+
+/* Watched/Open Status */
+.watched {
+  color: green;
+  font-weight: bold;
+}
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 10px;
+  padding: 20px;
+  width: 800px;
+  height: 500px;
+  margin: auto;
+  /* overflow: hidden; */
+}
+
+/* Video, PDF, and Text content inside the modal */
+#modalVideo, #modalPdf {
+  width: 750px;
+  height: 450px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+#modalText {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Close Button */
+#closeModal {
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Modal Background */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content.hidden {
+  display: none;
+}
+
+.c_detail .btn {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 10px 450px;  /* Center the button horizontally */
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  width: 200px;
+}
+
+
+.c_detail .btn:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: scale(1.05);
+}
+
+
+
+
+
 
 
 /* Course Creator Page Styles (cr_c class) */
 .cr_c {
-  max-width: 900px;
-  margin: 50px auto;
+  width: 500px;
+  margin: 30px auto; /* Centers the container horizontally */
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -393,44 +628,31 @@ p {
   border: 1px solid #774a4a;
 }
 
-.cr_c .btn-primary {
-  background-color: rgb(53, 192, 185);
-  border-color: #9abee6;
-  padding: 10px 20px;
-  text-align: left;
-  font-size: 1.1rem;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.cr_c h2 {
+  padding: 0;
+  color: #333;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0px 93px;
 }
 
-.cr_c .btn-primary:hover {
-  background-color: #0fe4dd;
-  border-color: #004085;
-}
-
-.cr_c .btn-success {
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 10px 20px;
-  text-align: left;
-  font-size: 1.1rem;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.cr_c .btn-success:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.cr_c .form-control {
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 1rem;
-  resize: none;
-  border-radius: 5px;
+.cr_c .mb-3 input,
+.cr_c .mb-3 select,
+.cr_c .mb-3 textarea {
   border: 1px solid #ccc;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 8px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.3s ease; /* Smoother transition */
+  font-size: 1rem;
+  border-radius: 5px;
+  height: 100%;
+  width: 100%; /* Full width inside the container */
+  max-width: 416px; /* Maintain consistent width */
+}
+
+.cr_c .mb-3:active input,
+.cr_c .mb-3:active select,
+.cr_c .mb-3:active textarea {
+  border-color: #095bb1;
+  box-shadow: 0 0 13px rgba(6, 43, 83, 0.5);
 }
 
 .cr_c .form-control:focus {
@@ -459,18 +681,6 @@ p {
   margin-bottom: 15px;
 }
 
-.cr_c .mb-3 input,
-.cr_c .mb-3 select,
-.cr_c .mb-3 textarea {
-  border: 1px solid #ccc;
-  transition: border-color 0.9s ease;
-}
-
-.cr_c .mb-3:active input,
-.cr_c .mb-3:active select,
-.cr_c .mb-3:active textarea {
-  border-color: #095bb1;
-}
 
 /* Focus state for form fields */
 .cr_c .form-control:focus {
@@ -831,7 +1041,6 @@ p {
 
 
 /* add content page */
-
 .a_u_c {
   max-width: 800px;
   margin: 50px auto;

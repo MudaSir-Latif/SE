@@ -67,6 +67,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'coutom_filter':'template_tags.coutom_filter'
+            }
         },
     },
 ]
@@ -151,5 +154,3 @@ LOGOUT_REDIRECT_URL = 'main:main_page'  # Redirect to 'main_page' after logout
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-

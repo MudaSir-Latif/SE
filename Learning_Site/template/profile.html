@@ -1,48 +1,75 @@
 {% extends 'layout.html' %}
+{% load coutom_filter %}
+
+
 
 {% block content %}
-<div class=" profile">
+<div class="profile">
     {% if user.profile_main.role == 'learner' %}
-        <h3 class="text-center">Subscribed Courses</h3>
+        <h3 class="text-center mb-4">Subscribed Courses</h3>
 
-        <div class="row">
-            {% for course in courses %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ course.title }}</h3>
-                        <p class="card-text">{{ course.description|truncatewords:20 }}</p>
+        {% if courses %}
+        <!-- Bootstrap Carousel -->
+        <div id="subscribedCoursesCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for chunk in courses|chunk:3 %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="container">
+                        <div class="row">
+                            {% for course in chunk %}
+                            <div class="col-md-4 d-flex align-items-stretch">
+                                <div class="card mb-4">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="card-title">{{ course.title }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">{{ course.description|truncatewords:15 }}</p>
 
-                        <!-- Course Videos -->
-                        <h5>Course Videos:</h5>
+                                        <!-- First Video Display -->
+                                        {% with course.contents.all|default_if_none:""|slice:":1" as first_video %}
+                                            {% if first_video %}
+                                            <div>
+                                                <video controls controlsList="nodownload">
+                                                    <source src="{{ first_video.0.video.url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                <p class="mt-2">{{ first_video.0.title }}</p>
+                                            </div>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
 
-                        <!-- Display first video -->
-                        {% with course.contents.all|default_if_none:""|slice:":1" as first_video %}
-                        {% if first_video %}
-                        <div>
-                            <video controls>
-                                <source src="{{ first_video.0.video.url }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p class="mt-2">{{ first_video.0.title }}</p>
+                                    <div class="card-footer">
+                                        <p>Instructor: {{ course.instructor }}</p>
+                                        <p>Type: {{ course.get_course_type_display }}</p>
+                                    </div>
+
+                                    <a href="{% url 'course_detail' course.id %}" class="btn">View Course</a>
+
+                                    
+                                </div>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endif %}
-                        {% endwith %}
-                    </div>
-
-                    <div class="card-footer">
-                        <p>Instructor: {{ course.instructor }}</p>
-                        <p>Type: {{ course.get_course_type_display }}</p>
-                        <a href="{% url 'course_detail' course.id %}" class="btn btn-primary">View Course</a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% empty %}
-            <p class="text-center">You have not subscribed to any courses yet.</p>
-            {% endfor %}
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#subscribedCoursesCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#subscribedCoursesCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
+        {% else %}
+            <p class="text-center">You have not subscribed to any courses yet.</p>
+        {% endif %}
     {% else %}
-    <p class="text-center">This page is only for learners.</p>
+        <p class="text-center">This page is only for learners.</p>
     {% endif %}
 </div>
 {% endblock %}
+

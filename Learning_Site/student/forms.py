@@ -14,3 +14,4 @@ class SubscriptionForm(forms.ModelForm):
             'payment_method': forms.Select(attrs={'class': 'form-control'}),
             'payment_screenshot': forms.FileInput(attrs={'class': 'form-control'}),
         }
+    

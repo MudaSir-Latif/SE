@@ -10,7 +10,6 @@
 </div>
 {% else %}
 <div class="sub">
-    <div class="container  ">
         <h2>Subscribe to {{ course_name }}</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -76,7 +75,6 @@
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
-    </div>
 </div>
 {% endif %}
 

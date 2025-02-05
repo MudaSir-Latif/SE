@@ -22,6 +22,13 @@ from .models import (
 )
 from .forms import CourseForm, CourseContentForm, QuizForm, QuestionForm
 from authentication.models import Profile_main
+from student.models import Subscription,Student
+
+
+
+
+
+
 
 def create_course(request):
     if request.user.profile_main.role != 'instructor':
@@ -39,19 +46,26 @@ def create_course(request):
     return render(request, 'registration/create_course.html', {'form': form})
 
 
+@login_required
 def course_detail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     course_contents = CourseContent.objects.filter(course=course).order_by('order')
-
+    
+    # Check if the user has access to this course
+    has_access = True
+    
     return render(
         request,
         'course_detail.html',
         {
             'course': course,
             'course_contents': course_contents,
-            'student_id': request.user.id,  # Add this for potential logged-in student tracking
+            'has_access': has_access,  # Pass this variable to the template
         }
     )
+
+
+
 
 # Filter courses by type (paid/unpaid/all)
 def filter_courses(request):
@@ -67,41 +81,8 @@ def filter_courses(request):
     else:
         courses = Course.objects.all().prefetch_related(content_prefetch)
 
-    return render(request, 'course_list.html', {'courses': courses, 'selected_type': course_type})
+    return render(request, 'main_page.html', {'courses': courses, 'selected_type': course_type})
 
-# def add_update_content(request, course_id):
-#     course = get_object_or_404(Course, id=course_id)
-#     if request.method == "POST":
-#         form = CourseContentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             course_content = form.save(commit=False)
-#             course_content.course = course
-#             course_content.save()
-#             messages.success(request, 'Content added successfully!')
-#             #return redirect('success_page')
-#     else:
-#         form = CourseContentForm()
-
-#     return render(request, 'registration/add_update_content.html', {'form': form, 'course': course})
-
-# from django.urls import reverse
-
-# def add_update_content(request, course_id):
-#     course = get_object_or_404(Course, id=course_id)
-#     if request.method == "POST":
-#         form = CourseContentForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             course_content = form.save(commit=False)
-#             course_content.course = course
-#             course_content.save()
-#             messages.success(request, 'Content added successfully!')
-
-#             # Redirect to the create_quiz view
-#             return redirect(reverse('create_quiz', args=[course.id]))
-#     else:
-#         form = CourseContentForm()
-
-#     return render(request, 'registration/add_update_content.html', {'form': form, 'course': course})
 
 from django.forms import modelformset_factory
 
@@ -109,7 +90,7 @@ def add_update_content(request, course_id):
     course = get_object_or_404(Course, id=course_id)
 
     # Create a formset for CourseContent
-    CourseContentFormSet = modelformset_factory(CourseContent, form=CourseContentForm, extra=5)
+    CourseContentFormSet = modelformset_factory(CourseContent, form=CourseContentForm, extra=2)
 
     if request.method == "POST":
         formset = CourseContentFormSet(request.POST, request.FILES)
@@ -138,67 +119,6 @@ def add_update_content(request, course_id):
     return render(request, 'registration/add_update_content.html', {'formset': formset, 'course': course})
 
 
-# class CustomLoginView(LoginView):
-#     template_name = 'registration/login.html'
-#     redirect_authenticated_user = True
-
-#     def form_valid(self, form):
-#         user = form.get_user()
-#         if user.profile.is_instructor:
-#             login(self.request, user)
-#             return redirect('create_course')
-#         else:
-#             raise PermissionDenied("You must be an instructor to access this page.")
-
-
-# from django.views.decorators.csrf import csrf_protect
-# @csrf_protect
-# def mark_video_watched(request):
-#     if request.method == 'POST':
-#         try:
-#             data = json.loads(request.body)
-#             video_id = data.get('video_id')
-#             student_id = data.get('student_id')
-
-#             # Find the video content by ID
-#             video_content = CourseContent.objects.get(id=video_id)
-#             student = User.objects.get(id=student_id)
-
-#             # Update the 'watched' status in the VideoWatch table
-#             video_watch, created = VideoWatch.objects.get_or_create(
-#                 student=student,
-#                 video_content=video_content
-#             )
-#             video_watch.watched = True
-#             video_watch.watched_at = timezone.now()  # Set the time when it was watched
-#             video_watch.save()
-
-#             # Check if the video is marked as the last video
-#             if video_content.is_last_video is True:
-#                 # Check for an associated quiz
-#                 # quiz = Quiz.objects.filter(Course.title).first()
-#                 quiz = Quiz.objects.filter(course=video_content.course).first()
-#                 if quiz:
-#                     quiz_url = reverse('quiz_view', args=[quiz.id])  # changed video id to quiz id
-#                     # return redirect('quiz_view', quiz_id=quiz.id)
-#                     return JsonResponse({'status': 'success', 'quiz_url': quiz_url}, status=200)
-#                 else:
-#                     return JsonResponse({'status': 'error', 'message': 'No quiz available for this video.'}, status=404)
-
-#             # If not the last video, just mark as watched and return success
-#             return JsonResponse({'status': 'success', 'message': 'Video marked as watched.'}, status=200)
-
-#         except CourseContent.DoesNotExist:
-#             return JsonResponse({'status': 'error', 'message': 'Video not found'}, status=404)
-
-#         except User.DoesNotExist:
-#             return JsonResponse({'status': 'error', 'message': 'Student not found'}, status=404)
-
-#         except Exception as e:
-#             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-
-#     else:
-#         return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=400)
 
 from django.views.decorators.csrf import csrf_protect
 
@@ -294,7 +214,7 @@ def create_quiz(request, course_id):
     if hasattr(course, 'quiz'):
         return JsonResponse({'message': 'Quiz already exists for this course.'}, status=400)
 
-    QuestionFormSet = formset_factory(QuestionForm, extra=10)
+    QuestionFormSet = formset_factory(QuestionForm, extra=2)
 
     if request.method == 'POST':
         quiz_form = QuizForm(request.POST)
@@ -348,39 +268,7 @@ def edit_course_content(request, course_id):
 
     return render(request, 'edit_course_content.html', {'course': course, 'contents': contents})
 
-# def generate_certificate(request, course_id):
-#     course = get_object_or_404(Course, id=course_id)
 
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'attachment; filename="certificate_{course.id}.pdf"'
-#     p = canvas.Canvas(response, pagesize=letter)
-
-#     p.setFont("Helvetica-Bold", 24)
-#     p.setFillColor(colors.green)
-#     p.drawString(200, 750, "Certificate of Completion")
-
-#     p.setFont("Helvetica", 18)
-#     p.setFillColor(colors.black)
-#     p.drawString(100, 700, f"This is to certify that")
-
-#     p.setFont("Helvetica-Bold", 18)
-#     p.drawString(100, 670, f"{request.user.username} has successfully completed")
-
-#     p.setFont("Helvetica", 18)
-#     p.setFillColor(colors.black)
-#     p.drawString(100, 640, f"Course: {course.title}")
-
-#     p.setFont("Helvetica-Oblique", 16)
-#     p.setFillColor(colors.black)
-#     p.drawString(100, 600, "Date of Completion: " + str(course.created_at))
-
-#     p.setFont("Helvetica", 14)
-#     p.drawString(100, 570, "Congratulations!")
-
-#     p.showPage()
-#     p.save()
-
-#     return response  
 
 def generate_certificate(request, course_id):
     course = get_object_or_404(Course, id=course_id)
@@ -448,43 +336,6 @@ def add_questions(request, quiz_id):
         question_form = QuestionForm()
 
     return render(request, 'registration/add_questions.html', {'question_form': question_form, 'quiz': quiz})
-
-# @login_required
-# def edit_course_content(request, course_id):
-#     course = get_object_or_404(Course, id=course_id)
-
-#     # Check if the user is the instructor of the course
-#     if not (request.user.profile.is_instructor and course.instructor == request.user.profile):
-#         return HttpResponseForbidden("You are not allowed to edit this course.")
-
-#     # Fetch all contents of the course
-#     contents = CourseContent.objects.filter(course=course).order_by('order')
-
-#     if request.method == 'POST':
-#         content_id = request.POST.get('content_id')
-#         action = request.POST.get('action')
-
-#         if action == 'delete' and content_id:
-#             # Handle content deletion
-#             content = get_object_or_404(CourseContent, id=content_id, course=course)
-#             content.delete()
-#             return redirect('edit_course_content', course_id=course.id)
-
-#         if action == 'update' and content_id:
-#             # Handle content updates
-#             content = get_object_or_404(CourseContent, id=content_id, course=course)
-#             content.Contenttitle = request.POST.get('title', content.Contenttitle)
-#             content.order = request.POST.get('order', content.order)
-
-#             # Handle video file update
-#             if 'video' in request.FILES:
-#                 content.video = request.FILES['video']
-
-#             content.save()
-#             return redirect('edit_course_content', course_id=course.id)
-
-#     return render(request, 'edit_course_content.html', {'course': course, 'contents': contents})
-
 
 
 

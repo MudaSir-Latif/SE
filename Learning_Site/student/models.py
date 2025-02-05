@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from course_instructor.models import Course
 
 class Student(models.Model):
     COURSE_TYPE_CHOICES = [
@@ -31,9 +32,11 @@ class Student(models.Model):
 class Subscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    course_title = models.CharField(max_length=100)
-    course_type = models.CharField(max_length=10, choices=Student.COURSE_TYPE_CHOICES)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Link to Course model
     subscribed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.student.full_name} - {self.course_title}"
+        return f"{self.student.full_name} - {self.course.title}"
+
+    def has_access(self):
+        return self.course.course_type == 'unpaid' or self.payment_method is not None

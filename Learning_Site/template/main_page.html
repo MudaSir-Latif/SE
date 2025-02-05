@@ -1,67 +1,97 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load coutom_filter %}
+
 <link rel="stylesheet" href="{% static 'main_page.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
 {% block title %}
 Course List
 {% endblock %}
 
 {% block content %}
-
-<main class="container mt-5 ma_p">
+<main class="container ma_p">
   <h1 class="mb-4 text-center">
     {% if selected_type == 'paid' %}
-    Paid Courses
+      Paid Courses
     {% elif selected_type == 'unpaid' %}
-    Unpaid Courses
+      Unpaid Courses
     {% else %}
-    All Courses
-    {% if user.profile_main.role == 'instructor' %}
-    <!-- Show 'Create Course' and 'Edit Course' buttons for instructors -->
-    <div class="mb-3">
-      <a href="{% url 'create_course' %}" class="btn btn-primary">Create Course</a>
-    </div>
+      All Courses
     {% endif %}
+    
+    {% if user.profile_main.role == 'instructor' %}
+      <!-- Show 'Create Course' and 'Edit Course' buttons for instructors -->
+      <div class="mb-3">
+        <a href="{% url 'create_course' %}" class="btn btn_ins btn-primary">Create Course</a>
+      </div>
     {% endif %}
   
   </h1>
 
-  <!-- Course Cards -->
-  <div class="row">
-    {% for course in courses %}
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h3 class="card-title">{{ course.title }}</h3>
-          <p class="card-text">{{ course.description|truncatewords:20 }}</p>
-          <div class="d-flex justify-content-between mb-3">
-            <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">View Course</a>
-            <a href="{% url 'subscribe' course.title course.course_type %}" class="btn btn-warning btn-sm">Subscribe</a>
-          </div>
+  <!-- Carousel -->
+  <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for chunk in courses|chunk:3 %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="container">
+            <div class="row">
+              {% for course in chunk %}
+                <div class="col-md-4 d-flex align-items-stretch">
+                  <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                      <h5 class="card-title">{{ course.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text">{{ course.description|truncatewords:15 }}</p>
 
-          <!-- First Video Display -->
-          {% with course.contents.all|default_if_none:""|slice:":1" as first_video %}
-          {% if first_video %}
-          <div>
-            <video controls controlsList="nodownload">
-              <source src="{{ first_video.0.video.url }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <p class="mt-2">{{ first_video.0.title }}</p>
-          </div>
-          {% endif %}
-          {% endwith %}
-        </div>
+                      <!-- First Video Display -->
+                      {% with course.contents.all|default_if_none:""|slice:":1" as first_video %}
+                        {% if first_video %}
+                          <div>
+                            <video controls controlsList="nodownload">
+                              <source src="{{ first_video.0.video.url }}" type="video/mp4">
+                              Your browser does not support the video tag.
+                            </video>
+                            <p class="mt-2">{{ first_video.0.title }}</p>
+                          </div>
+                        {% endif %}
+                      {% endwith %}
+                    </div>
 
-        <div class="card-footer ">
-          <p>Instructor: {{ course.instructor }}</p>
-          <p>Type: {{ course.get_course_type_display }}</p>
+                    <div class="card-footer">
+                      <p>Instructor: {{ course.instructor }}</p>
+                      <p>Type: {{ course.get_course_type_display }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between button_ma_p">
+                      <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">View Course</a>
+                      
+                      {% if user.profile_main.role == 'learner' %}
+                      <a href="{% url 'subscribe' course.title course.course_type %}" class="btn btn-warning btn-sm">Subscribe</a>
+                      {% endif %}
+                      
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-      </div>
+      {% empty %}
+        <div class="carousel-item active">
+          <p class="text-center">No courses available.</p>
+        </div>
+      {% endfor %}
     </div>
-    {% empty %}
-    <p class="text-center col-12">No courses available in this category.</p>
-    {% endfor %}
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon "></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon "></span>
+    </button>
   </div>
 </main>
 {% endblock %}
