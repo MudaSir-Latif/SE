@@ -8,51 +8,46 @@
 {% endblock %}
 
 {% block content %}
-<main class="container mt-5">
-  <h1 class="mb-4 text-center">
-    {% if selected_type == 'paid' %}
+<main class="all_c container mt-5">
+
+    <h1>
+      {% if selected_type == "paid" %}
       Paid Courses
-    {% elif selected_type == 'unpaid' %}
+      {% elif selected_type == "unpaid" %}
       Unpaid Courses
-    {% else %}
+      {% else %}
       All Courses
-    {% endif %}
-  </h1>
+      {% endif %}
+  
+    </h1>
 
   <div class="row">
     {% for course in courses %}
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h3 class="card-title">{{ course.title }}</h3>
-          <p class="card-text">{{ course.description|truncatewords:20 }}</p>
-          <div class="d-flex justify-content-between mb-3">
-            <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">View Course</a>
-            <a href="{% url 'subscribe' course.title course.course_type %}" class="btn btn-warning btn-sm">Subscribe</a>
-          </div>
-
-          <!-- Course Videos -->
-          <h5>Course Videos:</h5>
-
-          <!-- First Video Display -->
-          {% with course.contents.all|default_if_none:""|slice:":1" as first_video %}
-          {% if first_video %}
-          <div>
-            <video width="100%" controls>
-              <source src="{{ first_video.0.video.url }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <p class="mt-2">{{ first_video.0.title }}</p>
-          </div>
-          {% else %}
-          <p>No videos available for this course.</p>
-          {% endif %}
-          {% endwith %}
+    <div class="col-12 mb-4">
+      <div class="card flex-row">
+        {% with course.contents.all|default_if_none:""|slice:":1" as first_video %}
+        {% if first_video %}
+        <div class="col-md-4 p-3 d-flex align-items-center">
+          <video controls>
+            <source src="{{ first_video.0.video.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
+        {% endif %}
+        {% endwith %}
 
-        <div class="card-footer text-muted">
-          <p>Instructor: {{ course.instructor }}</p>
-          <p>Type: {{ course.get_course_type_display }}</p>
+        <div class="col-md-8 p-3">
+          <div class="card-body">
+            <h3 class="card-title">{{ course.title }}</h3>
+            <p class="card-text">{{ course.description|truncatewords:20 }}</p>
+            <p><strong>Instructor:</strong> {{ course.instructor }}</p>
+            <p><strong>Type:</strong> {{ course.get_course_type_display }}</p>
+            
+            <div class="card-buttons">
+              <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">View Course</a>
+              <a href="{% url 'subscribe' course.title course.course_type %}" class="btn btn-warning btn-sm">Subscribe</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

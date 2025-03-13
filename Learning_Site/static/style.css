@@ -187,6 +187,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center; /* Center content inside */
 }
 
 /* Carousel */
@@ -197,7 +198,7 @@ body {
 }
 
 .ma_p .carousel-item {
-  padding:  0 50px ;
+  padding: 0 50px;
 }
 
 .ma_p .card {
@@ -210,16 +211,15 @@ body {
   display: block;
 }
 
-
-.ma_p .card-text{
+.ma_p .card-text {
   text-decoration: underline;
 }
 
-.ma_p .card-title{
+.ma_p .card-title {
   margin: 0;
 }
 
-.ma_p .card-body{
+.ma_p .card-body {
   padding-bottom: 0;
 }
 
@@ -239,7 +239,7 @@ body {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   margin: 20px;
-  background-color: transparent; 
+  background-color: transparent;
   filter: invert(100%) sepia(0%) saturate(0%) brightness(0%) contrast(100%);
 }
 
@@ -251,17 +251,93 @@ body {
   right: -5%; /* Move further to the right */
 }
 
-.ma_p .button_ma_p{
+.ma_p .button_ma_p {
   padding: 0px 14px 14px;
 }
 
-.ma_p .btn_ins{
+.ma_p .btn_ins {
   background-color: rgb(99, 196, 64);
 }
-.ma_p .btn_ins:hover{
+
+.ma_p .btn_ins:hover {
   background-color: rgb(51, 132, 22);
 }
 
+.ma_p .btn-all {
+  border-color: #28a745;
+  color: #28a745;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 13px;
+  border-width: 1.5px;
+  box-shadow: 0 2px 5px #1b911d;
+  margin: 20px auto; /* Added some top and bottom margin */
+  display: inline-block; /* Needed to work with text-align */
+  max-width: 200px;
+}
+
+.ma_p .btn-all:hover {
+  background-color: #a5faa578;
+  color: #070606d8;
+}
+
+
+
+/* this is the all courses page */
+.all_c {
+  margin-top: 50px;
+}
+.all_c h1{
+  text-align: center;
+}
+/* Course card layout */
+.all_c .card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  background-color: #fff;
+}
+
+/* Video container */
+.all_c .card video {
+  width: 200px; /* Take full width of its column */
+  height: 100px;
+  border-radius: 8px;
+}
+
+/* Course details */
+.all_c .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.all_c .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.all_c .card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Button container */
+.all_c .card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+/* Buttons */
+.all_c .card-buttons .btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
 
 
 

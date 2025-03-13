@@ -21,14 +21,12 @@ def subscribe(request, course_name, course_type):
             print("Form is valid, saving...")  # Debugging line
             student_data = form.save(commit=False)  # Get the student instance
             
-            # Assign the logged-in user if available
             if request.user.is_authenticated:
-                 student_data.user = request.user
+                student_data.user = request.user
             
-            student_data.course_name = course_name  # Set course_name automatically
-            student_data.type = course_type  # Set course_type automatically
+            student_data.course_name = course_name
+            student_data.type = course_type
             
-            # Handle paid course validation
             if course_type == 'paid':
                 if not student_data.payment_method:
                     form.add_error('payment_method', 'Payment method is required for paid courses.')
@@ -36,20 +34,23 @@ def subscribe(request, course_name, course_type):
                 if not payment_screenshot:
                     form.add_error('payment_screenshot', 'Payment screenshot is required for paid courses.')
                 else:
-                    student_data.payment_screenshot = payment_screenshot  # Assign the file to the model field
+                    student_data.payment_screenshot = payment_screenshot
             
-            # Save the student data only if there are no errors
             if not form.errors:
                 student_data.save()
                 print("Student data saved successfully.")
+
+                # Fetch course instance
+                try:
+                    course_instance = Course.objects.get(title=course_name)
+                except Course.DoesNotExist:
+                    return render(request, 'subscribe.html', {'error': 'Course not found'})
 
                 # Save subscription details
                 subscription = Subscription(
                     user=student_data.user,
                     student=student_data,
-                    course_title=course_name,
-                    course_type=course_type,
-
+                    course=course_instance,
                 )
                 subscription.save()
                 print("Subscription saved successfully.")
@@ -60,7 +61,6 @@ def subscribe(request, course_name, course_type):
         else:
             print(f"Form is invalid: {form.errors}")
     else:
-        # Pre-fill form with course name and type
         form = SubscriptionForm(initial={'course_name': course_name, 'type': course_type})
 
     return render(request, 'subscribe.html', {'form': form, 'course_name': course_name, 'course_type': course_type})

@@ -29,7 +29,7 @@ class CourseContent(models.Model):
     additional_resources = models.FileField(upload_to='resources/', null=True, blank=True)
     is_last_video = models.BooleanField(default=False)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.Contenttitle} ({self.content_type})"
 
 class Quiz(models.Model):

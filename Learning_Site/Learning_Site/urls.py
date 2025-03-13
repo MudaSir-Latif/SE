@@ -30,6 +30,7 @@ urlpatterns = [
     path('student/',include('student.urls')),
     path('authentication/',include('authentication.urls')),
     path('',include('main.urls')),
+    path('show_all_courses',views.check,name='show_all_courses')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

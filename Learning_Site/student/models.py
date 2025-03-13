@@ -30,13 +30,15 @@ class Student(models.Model):
         return self.full_name
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='subscriptions')
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)  # Link to Course model
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     subscribed_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return f"{self.student.full_name} - {self.course.title}"
 
     def has_access(self):
-        return self.course.course_type == 'unpaid' or self.payment_method is not None
+        # Unpaid courses are open; paid courses need a payment method
+        return self.course.course_type == 'unpaid' or self.student.payment_method is not None

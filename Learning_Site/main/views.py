@@ -24,36 +24,16 @@ def main_page(request):
 
 from student.models import Subscription
 
+
+
 def User_Profile(request):
     if request.user.profile_main.role == 'learner':
-        # Fetch subscriptions for the logged-in learner
-        subscriptions = Subscription.objects.filter(user=request.user)
-        # Fetch courses corresponding to the subscriptions
-        courses = Course.objects.filter(title__in=[sub.course_title for sub in subscriptions])
+        # Get courses directly related to the user's subscriptions
+        courses = Course.objects.filter(subscription__user=request.user).distinct()
     else:
-        # For other roles, show all courses or modify as per requirements
+        # For other roles, show all courses
         courses = Course.objects.all()
 
     return render(request, 'profile.html', {'courses': courses})
 
-# def main_page(request):
-#     # Fetch all courses
-#     courses = Course.objects.all()  # You can filter this as per your requirements
-#     return render(request, 'main_page.html', {'courses': courses})
 
-# def course_detail(request, course_id):
-#     # Get the course and its contents
-#     course = get_object_or_404(Course, id=course_id)
-#     course_contents = CourseContent.objects.filter(course=course)
-
-#     context = {
-#         'course': course,
-#         'course_contents': course_contents,
-#         'student_id': request.user.id,  # Pass user.id as student_id
-#     }
-#     return render(request, 'course_detail.html', context)
-
-# def your_view(request):
-#     student_id = request.user.id  # Assuming the logged-in user is the student
-#     context = {'student_id': student_id}
-#     return render(request, 'your_view.html', context)

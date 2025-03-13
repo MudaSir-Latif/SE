@@ -21,10 +21,8 @@ from .models import (
     Course, CourseContent, VideoWatch, Quiz, Question, QuizAttempt, Certificate
 )
 from .forms import CourseForm, CourseContentForm, QuizForm, QuestionForm
-from authentication.models import Profile_main
-from student.models import Subscription,Student
-
-
+from django.forms import modelformset_factory
+from django.utils.dateparse import parse_duration
 
 
 
@@ -84,17 +82,21 @@ def filter_courses(request):
     return render(request, 'main_page.html', {'courses': courses, 'selected_type': course_type})
 
 
-from django.forms import modelformset_factory
+
+
+
 
 def add_update_content(request, course_id):
     course = get_object_or_404(Course, id=course_id)
 
     # Create a formset for CourseContent
-    CourseContentFormSet = modelformset_factory(CourseContent, form=CourseContentForm, extra=2)
+    CourseContentFormSet = modelformset_factory(CourseContent, form=CourseContentForm, extra=2,can_delete=True)
 
     if request.method == "POST":
-        formset = CourseContentFormSet(request.POST, request.FILES)
-        
+        # formset = CourseContentFormSet(request.POST, request.FILES,queryset=CourseContent.objects.filter(course=course))
+        formset = CourseContentFormSet(request.POST or None, request.FILES or None, queryset=CourseContent.objects.filter(course=course))
+        print(request.FILES)  # Add this before formset.is_valid()
+
         if formset.is_valid():
             for form in formset:
                 course_content = form.save(commit=False)
@@ -112,13 +114,13 @@ def add_update_content(request, course_id):
 
             messages.success(request, 'Content added successfully!')
             return redirect(reverse('create_quiz', args=[course.id]))
+        else:
+            print("FORMSET ERRORS:", formset.errors)  # Print form errors
 
     else:
         formset = CourseContentFormSet(queryset=CourseContent.objects.none())
 
     return render(request, 'registration/add_update_content.html', {'formset': formset, 'course': course})
-
-
 
 from django.views.decorators.csrf import csrf_protect
 
@@ -241,21 +243,23 @@ def create_quiz(request, course_id):
 def edit_course_content(request, course_id):
     course = get_object_or_404(Course, id=course_id)
 
-    if not (request.user.profile_main.role == 'instructor'):
+    # Ensure only the instructor can edit
+    if not request.user.profile_main.role == 'instructor':
         return HttpResponseForbidden("You are not allowed to edit this course.")
 
     contents = CourseContent.objects.filter(course=course).order_by('order')
+    form = CourseContentForm()  # Ensure form is always defined
 
     if request.method == 'POST':
-        content_id = request.POST.get('content_id')
         action = request.POST.get('action')
+        content_id = request.POST.get('content_id')
 
         if action == 'delete' and content_id:
             content = get_object_or_404(CourseContent, id=content_id, course=course)
             content.delete()
             return redirect('edit_course_content', course_id=course.id)
 
-        if action == 'update' and content_id:
+        elif action == 'update' and content_id:
             content = get_object_or_404(CourseContent, id=content_id, course=course)
             content.Contenttitle = request.POST.get('title', content.Contenttitle)
             content.order = request.POST.get('order', content.order)
@@ -266,9 +270,19 @@ def edit_course_content(request, course_id):
             content.save()
             return redirect('edit_course_content', course_id=course.id)
 
-    return render(request, 'edit_course_content.html', {'course': course, 'contents': contents})
+        elif action == 'add':  # Handling the "Add" button
+            form = CourseContentForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_content = form.save(commit=False)
+                new_content.course = course  # Assign to the correct course
+                new_content.save()
+                return redirect('edit_course_content', course_id=course.id)
 
-
+    return render(request, 'edit_course_content.html', {
+        'course': course,
+        'contents': contents,
+        'form': form,  # Pass form to the template
+    })
 
 def generate_certificate(request, course_id):
     course = get_object_or_404(Course, id=course_id)
@@ -353,23 +367,34 @@ def delete_course_content(request, content_id):
 
     return render(request, 'delete_course_content_confirm.html', {'content': content, 'course': course})
 
+
 def edit_course(request, course_id):
     course = get_object_or_404(Course, id=course_id)
-    
-    # Check if the user is the instructor
-    # if not (request.user.profile_main.role == 'instructor' and course.instructor == request.user.profile_main):
+
+    # Ensure only the instructor can edit
     if not (request.user.profile_main.role == 'instructor'):
         return HttpResponseForbidden("You are not allowed to edit this course.")
-    
+
     if request.method == 'POST':
         course.title = request.POST.get('title', course.title)
         course.description = request.POST.get('description', course.description)
-        course.duration = request.POST.get('duration', course.duration)
+
+        # Parse duration correctly
+        duration_str = request.POST.get('duration')
+        if duration_str:
+            parsed_duration = parse_duration(duration_str)
+            if parsed_duration is not None:
+                course.duration = parsed_duration
+            else:
+                return render(request, 'edit_course.html', {
+                    'course': course,
+                    'error': "Invalid duration format. Use HH:MM:SS or DD HH:MM:SS"
+                })
+
         course.save()
         return redirect('course_detail', course_id=course.id)
 
     return render(request, 'edit_course.html', {'course': course})
-
 def delete_course(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     
