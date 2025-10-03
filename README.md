@@ -29,7 +29,6 @@ Learning_Site/
 ├── media/                  # Uploaded media (videos, payment screenshots)
 ├── Learning_Site/          # Project settings and URLs
 ├── requirements.txt        # Python dependencies
-├── vercel.json             # Vercel deployment config
 └── manage.py               # Django management script
 ```
 
@@ -74,8 +73,7 @@ Learning_Site/
 
 ## Deployment
 
-- The project includes a `vercel.json` for deployment on Vercel using Python 3.9 and the WSGI entrypoint.
-- Configure environment variables and static/media file storage as needed for production.
+- Configure environment variables and static/media file storage as needed for production. This repository doesn't include any active platform-specific deployment config by default.
 
 ## Key Apps and Models
 
